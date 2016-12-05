@@ -1,6 +1,8 @@
 package com.suresh.androidapp;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,11 +20,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.suresh.androidapp.fragments.ContactAddFragment;
+import com.suresh.androidapp.fragments.ContactListFragment;
+import com.suresh.androidapp.fragments.FlowerListFragment;
+import com.suresh.androidapp.presenters.MainPresenter;
 import com.suresh.androidapp.serviceManagers.NetworkServiceManager;
+import com.suresh.androidapp.views.MainView;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpActivity<MainView,MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
     FloatingActionButton fab;
 
@@ -70,12 +77,12 @@ public class MainActivity extends AppCompatActivity
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.async_progress);
         progressBar.setVisibility(View.INVISIBLE);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
-        ContactListFragment contactListFragment = new ContactListFragment();
-        fragmentTransaction.replace(R.id.content_main, contactListFragment).commit();
+    }
 
+    @NonNull
+    @Override
+    public MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 
     @Override
@@ -156,6 +163,8 @@ public class MainActivity extends AppCompatActivity
         ft.addToBackStack(backStateName);
 
 
+//        ft.replace(R.id.content_main, null, null);
+
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
             //fragment not in back stack, create it.
             ft.replace(R.id.content_main, newFragment, fragmentTag);
@@ -165,4 +174,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public Context getContext() {
+        return  this;
+    }
 }

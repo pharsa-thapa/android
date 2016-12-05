@@ -1,21 +1,27 @@
 package com.suresh.androidapp.entities;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by suresh on 11/11/16.
  */
 
-public class Contact {
+public class Contact extends RealmObject {
 
 
-    private int contactId;
+    @PrimaryKey
+    private long contactId;
+
     private String contactName;
+
     private String contactNumber;
 
-    public int getContactId() {
+    public long getContactId() {
         return contactId;
     }
 
-    public void setContactId(int contactId) {
+    public void setContactId(long contactId) {
         this.contactId = contactId;
     }
 

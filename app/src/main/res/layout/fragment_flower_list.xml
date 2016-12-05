@@ -9,7 +9,7 @@
         android:id="@+id/fragment_flower_list_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.suresh.androidapp.FlowerListFragment">
+        tools:context="com.suresh.androidapp.fragments.FlowerListFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/flower_recycler_view"

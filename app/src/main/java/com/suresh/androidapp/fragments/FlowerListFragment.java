@@ -1,16 +1,15 @@
-package com.suresh.androidapp;
+package com.suresh.androidapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.suresh.androidapp.AsyncTasks.FlowerAsyncWebService;
-import com.suresh.androidapp.entities.Flower;
+import com.suresh.androidapp.R;
+import com.suresh.androidapp.asyncTasks.FlowerAsyncWebService;
 import com.suresh.androidapp.serviceManagers.NetworkServiceManager;
 
 

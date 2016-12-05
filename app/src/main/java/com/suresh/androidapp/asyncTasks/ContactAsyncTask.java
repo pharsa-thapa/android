@@ -1,7 +1,6 @@
-package com.suresh.androidapp.AsyncTasks;
+package com.suresh.androidapp.asyncTasks;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,8 @@ import com.suresh.androidapp.models.ContactModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmResults;
 
 /**
  * Created by suresh on 11/20/16.
@@ -43,21 +44,20 @@ public class ContactAsyncTask extends AsyncTask<String, Void, List<Contact>> {
     @Override
     protected List<Contact> doInBackground(String... urls) {
         ContactModel contactModel = new ContactModel(context);
-        Cursor cursor = contactModel.getAllContacts();
+        RealmResults<Contact> contacts = contactModel.getAllContacts();
 
         List<Contact> contactList = new ArrayList<>();
 
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                Contact contact = new Contact();
-                contact.setContactId(cursor.getInt(0));
-                contact.setContactName(cursor.getString(1));
-                contact.setContactNumber(cursor.getString(2));
+        if (contactList != null) {
+            for (Contact contact : contacts) {
+                Contact contactInstance = new Contact();
+                contactInstance.setContactId(contact.getContactId());
+                contactInstance.setContactName(contact.getContactName());
+                contactInstance.setContactNumber(contact.getContactNumber());
 
-                contactList.add(contact);
+                contactList.add(contactInstance);
             }
         }
-
 
         return contactList;
     }

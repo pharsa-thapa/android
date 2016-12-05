@@ -52,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public boolean deleteRecord(String schema, String primaryKeyString, int primaryKey) {
+    public boolean deleteRecord(String schema, String primaryKeyString, long primaryKey) {
         return (db.delete(schema, primaryKeyString + " = " + primaryKey , null) > 0) ? true : false;
     }
 }

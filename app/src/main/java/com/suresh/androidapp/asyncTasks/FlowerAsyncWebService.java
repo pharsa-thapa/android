@@ -1,9 +1,8 @@
-package com.suresh.androidapp.AsyncTasks;
+package com.suresh.androidapp.asyncTasks;
 
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.suresh.androidapp.FlowerDetail;
 import com.suresh.androidapp.R;
 import com.suresh.androidapp.adapters.FlowerRVAdapter;
 import com.suresh.androidapp.constants.WebServiceConstants;

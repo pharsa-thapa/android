@@ -1,4 +1,4 @@
-package com.suresh.androidapp;
+package com.suresh.androidapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,16 +9,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
+import com.suresh.androidapp.R;
 import com.suresh.androidapp.entities.Contact;
 import com.suresh.androidapp.helpers.ValidationHelper;
 import com.suresh.androidapp.models.ContactModel;
+import com.suresh.androidapp.presenters.ContactAddPresenter;
+import com.suresh.androidapp.views.ContactAddView;
 
 import java.util.HashMap;
 
-public class ContactAddFragment extends Fragment {
+public class ContactAddFragment extends MvpFragment<ContactAddView, ContactAddPresenter> implements ContactAddView {
 
     TextView txtName;
     TextView txtPhone;
+
+    @Override
+    public ContactAddPresenter createPresenter() {
+        return new ContactAddPresenter();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
