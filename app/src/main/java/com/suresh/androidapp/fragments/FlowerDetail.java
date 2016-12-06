@@ -8,9 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.suresh.androidapp.R;
+import com.suresh.androidapp.presenters.ContactAddPresenter;
+import com.suresh.androidapp.presenters.FlowerDetailPresenter;
+import com.suresh.androidapp.views.ContactAddView;
+import com.suresh.androidapp.views.FlowerDetailView;
 
-public class FlowerDetail extends Fragment {
+public class FlowerDetail extends MvpFragment<FlowerDetailView, FlowerDetailPresenter> implements FlowerDetailView {
+
+    @Override
+    public FlowerDetailPresenter createPresenter() {
+        return new FlowerDetailPresenter();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

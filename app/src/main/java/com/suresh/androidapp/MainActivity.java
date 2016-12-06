@@ -162,9 +162,6 @@ public class MainActivity extends MvpActivity<MainView,MainPresenter> implements
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(backStateName);
 
-
-//        ft.replace(R.id.content_main, null, null);
-
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
             //fragment not in back stack, create it.
             ft.replace(R.id.content_main, newFragment, fragmentTag);

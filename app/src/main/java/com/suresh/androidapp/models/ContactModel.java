@@ -8,6 +8,7 @@ import com.suresh.androidapp.entities.Contact;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 
 /**
@@ -16,10 +17,7 @@ import io.realm.RealmResults;
 
 public class ContactModel {
 
-    static Context context;
-    private static String schema = DatabaseConstants.TABLE_CONTACTS;
-    private static String primaryKeyName = DatabaseConstants.CONTACT_ID;
-
+    private Context context;
     private static Realm realm;
 
     public ContactModel(Context ctx) {
@@ -31,7 +29,6 @@ public class ContactModel {
     public static Long saveContact(Contact contact) {
         try {
             realm.beginTransaction();
-
 
             long lastId = (realm.where(Contact.class).max("contactId")) != null ? (long) (realm.where(Contact.class).max("contactId")) : 0;
             long nextID = (lastId < 1) ? 1 : lastId + 1;
@@ -45,14 +42,14 @@ public class ContactModel {
 
             return Long.parseLong(1 + "");
         } catch (Exception e) {
-            Log.v("ContactModel", "Failed to delete record due to : " + e);
+            Log.v("ContactModel", "Failed to save contact due to : " + e);
             return Long.parseLong(0 + "");
         }
     }
 
     public RealmResults<Contact> getAllContacts() {
         RealmResults<Contact> contacts = realm.where(Contact.class)
-                .findAll();
+                .findAllSorted("contactName", Sort.ASCENDING);
         return contacts;
     }
 
