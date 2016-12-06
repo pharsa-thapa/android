@@ -15,7 +15,7 @@ import com.suresh.androidapp.presenters.FlowerDetailPresenter;
 import com.suresh.androidapp.views.ContactAddView;
 import com.suresh.androidapp.views.FlowerDetailView;
 
-public class FlowerDetail extends MvpFragment<FlowerDetailView, FlowerDetailPresenter> implements FlowerDetailView {
+public class FlowerDetailFragment extends MvpFragment<FlowerDetailView, FlowerDetailPresenter> implements FlowerDetailView {
 
     @Override
     public FlowerDetailPresenter createPresenter() {

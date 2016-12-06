@@ -2,7 +2,6 @@ package com.suresh.androidapp.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.suresh.androidapp.fragments.FlowerDetail;
 import com.suresh.androidapp.R;
 import com.suresh.androidapp.entities.Flower;
+import com.suresh.androidapp.fragments.FlowerDetailFragment;
 
 import java.util.List;
 
@@ -51,13 +50,15 @@ public class FlowerRVAdapter extends RecyclerView.Adapter<FlowerRVAdapter.Flower
                     bundle.putString("flowerInstruction", flower.getInstructions());
                     bundle.putString("flowerId", flower.getProductId() + "");
 
-                    FlowerDetail fragFlowerDetail = new FlowerDetail();
+                    FlowerDetailFragment fragFlowerDetail = new FlowerDetailFragment();
                     fragFlowerDetail.setArguments(bundle);
 
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-                    FragmentManager fm = activity.getSupportFragmentManager();
-                    fm.beginTransaction().replace(R.id.content_main, fragFlowerDetail, null).commit();
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.content_main, fragFlowerDetail, "flowerDetail")
+                            .commit();
 
                 }
             });
