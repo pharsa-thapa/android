@@ -41,6 +41,8 @@ public class ContactAddFragment extends MvpFragment<ContactAddView, ContactAddPr
         txtName = (TextView) view.findViewById(R.id.name_field);
         txtPhone = (TextView) view.findViewById(R.id.phone_field);
 
+        presenter = new ContactAddPresenter(this);
+
         Button addButton = (Button) view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,8 +17,8 @@ public class ContactAddPresenter implements ContactAddPresenterInterface, MvpPre
 
     ContactAddFragment contactAddView;
 
-    public ContactAddPresenter(ContactAddFragment contactAddView) {
-        this.contactAddView = contactAddView;
+    public ContactAddPresenter(ContactAddFragment contactAddFragment) {
+        this.contactAddView = contactAddFragment;
     }
 
     @Override

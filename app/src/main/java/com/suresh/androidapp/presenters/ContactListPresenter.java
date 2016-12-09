@@ -1,6 +1,7 @@
 package com.suresh.androidapp.presenters;
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
+import com.suresh.androidapp.fragments.ContactListFragment;
 import com.suresh.androidapp.presenters.interfaces.ContactListPresenterInterface;
 import com.suresh.androidapp.views.ContactListView;
 
@@ -9,6 +10,13 @@ import com.suresh.androidapp.views.ContactListView;
  */
 
 public class ContactListPresenter implements ContactListPresenterInterface, MvpPresenter<ContactListView> {
+
+    ContactListView contactListView;
+
+    public ContactListPresenter(ContactListView contactListView) {
+        this.contactListView = contactListView;
+    }
+
     @Override
     public void attachView(ContactListView view) {
 
