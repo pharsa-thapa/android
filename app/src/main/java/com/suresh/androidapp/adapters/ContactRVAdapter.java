@@ -5,13 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suresh.androidapp.R;
 import com.suresh.androidapp.entities.Contact;
-import com.suresh.androidapp.models.ContactModel;
+import com.suresh.androidapp.interactors.ContactInteractor;
 
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class ContactRVAdapter extends RecyclerView.Adapter<ContactRVAdapter.Cont
     boolean deleteContact(Contact contact) {
         boolean isDeleted = false;
 
-        if (new ContactModel(getContext()).deleteContact(contact) ){
+        if (new ContactInteractor(getContext()).deleteContact(contact) ){
             isDeleted = true;
         }
 

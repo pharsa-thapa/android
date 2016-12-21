@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.suresh.androidapp.entities.Contact;
 import com.suresh.androidapp.fragments.ContactAddFragment;
 import com.suresh.androidapp.helpers.ValidationHelper;
-import com.suresh.androidapp.models.ContactModel;
+import com.suresh.androidapp.interactors.ContactInteractor;
 import com.suresh.androidapp.presenters.interfaces.ContactAddPresenterInterface;
 import com.suresh.androidapp.views.ContactAddView;
 
@@ -51,7 +51,7 @@ public class ContactAddPresenter implements ContactAddPresenterInterface, MvpPre
         if (!isValidName || !isValidPhone) {
             error = (String) nameValHm.get("error") + (String) phoneValHm.get("error");
         } else {
-            ContactModel contactModel = new ContactModel(contactAddView.getContext());
+            ContactInteractor contactModel = new ContactInteractor(contactAddView.getContext());
             Contact contact = new Contact();
             contact.setContactName(name);
             contact.setContactNumber(phone);

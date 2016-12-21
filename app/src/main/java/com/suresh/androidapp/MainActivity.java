@@ -1,6 +1,7 @@
 package com.suresh.androidapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,16 +12,24 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.suresh.androidapp.fragments.CategoryAddFragment;
 import com.suresh.androidapp.fragments.ContactAddFragment;
 import com.suresh.androidapp.fragments.ContactListFragment;
 import com.suresh.androidapp.fragments.FlowerListFragment;
@@ -29,7 +38,7 @@ import com.suresh.androidapp.serviceManagers.NetworkServiceManager;
 import com.suresh.androidapp.views.MainView;
 
 
-public class MainActivity extends MvpActivity<MainView,MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
     FloatingActionButton fab;
 
@@ -110,7 +119,16 @@ public class MainActivity extends MvpActivity<MainView,MainPresenter> implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_setting1) {
+            Toast.makeText(this, "Setting 1", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.action_setting2) {
+            Toast.makeText(this, "Setting 2", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.action_setting3) {
+            Toast.makeText(this, "Setting 3", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -142,6 +160,13 @@ public class MainActivity extends MvpActivity<MainView,MainPresenter> implements
             ContactAddFragment frag = new ContactAddFragment();
             toggleFragmentView(frag);
 
+        } else if (id == R.id.nav_category_add) {
+
+            CategoryAddFragment frag = new CategoryAddFragment();
+            toggleFragmentView(frag);
+
+        } else if (id == R.id.nav_dialog_demo) {
+            showDialog();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,6 +198,47 @@ public class MainActivity extends MvpActivity<MainView,MainPresenter> implements
 
     @Override
     public Context getContext() {
-        return  this;
+        return this;
+    }
+
+
+    public void showDialog() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.fragment_dialog, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(layout);
+
+        Button btnCancel = (Button) layout.findViewById(R.id.category_cancel);
+        Button btnSave = (Button) layout.findViewById(R.id.category_save);
+        final TextView txtName = (TextView) layout.findViewById(R.id.category_name_text);
+
+        final AlertDialog dialog = builder.create();
+
+        dialog.show();
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("Test", "Testing click event Cancelling. Category Name : "+ txtName.getText().toString());
+                dialog.dismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String categoryName = txtName.getText().toString().trim();
+                Log.v("Test", "Testing click event Saving. Category Name : "+ txtName.getText().toString());
+                if(categoryName.equals("")){
+                    Toast.makeText(MainActivity.this, "Category Name cannot be empty", Toast.LENGTH_SHORT).show();
+                }else{
+
+
+                    new CategoryAddFragment().presenter.addCategory(categoryName, getContext());
+                }
+            }
+        });
+
+
     }
 }

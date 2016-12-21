@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import com.suresh.androidapp.R;
 import com.suresh.androidapp.adapters.ContactRVAdapter;
 import com.suresh.androidapp.entities.Contact;
-import com.suresh.androidapp.models.ContactModel;
+import com.suresh.androidapp.interactors.ContactInteractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ContactAsyncTask extends AsyncTask<String, Void, List<Contact>> {
 
     @Override
     protected List<Contact> doInBackground(String... urls) {
-        ContactModel contactModel = new ContactModel(context);
+        ContactInteractor contactModel = new ContactInteractor(context);
         RealmResults<Contact> contacts = contactModel.getAllContacts();
 
         List<Contact> contactList = new ArrayList<>();

@@ -11,6 +11,16 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Add Contact" />
 
+        <item
+            android:id="@+id/nav_category_add"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Add Category" />
+
+    <item
+        android:id="@+id/nav_dialog_demo"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Show Dialog" />
+
     </group>
 
     <item android:title="Other Links">
